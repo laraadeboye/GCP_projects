@@ -190,7 +190,7 @@ To create an HTTP load balancer, your VMs must reside in a managed instance grou
 1. Create the load balancer template named `lb-backend-template`:
 ##
         gcloud compute instance-templates create lb-backend-template \
-        --region=Region \
+        --region=us-east4 \
         --network=default \
         --subnet=default \
         --tags=allow-health-check \
