@@ -81,7 +81,7 @@ You need to:
 - Create a target HTTP proxy to route requests to your URL map
 - Create a forwarding rule.
 
-### My answers
+# My Answers
 1. First, We will create a load balancer template named `nucleus-lb-template`.
 
 ##
