@@ -115,7 +115,7 @@ The script will update the vm, install nginx and replace nginx with 'Google Clou
 
 Set the named-port with this command:
 ##
-    gcloud compute instance-groups managed set-named-ports nucleus webserver --named-ports http:80 --zone=$ZONE
+    gcloud compute instance-groups set-named-ports nucleus-webserver --named-ports http:80 --zone=$ZONE
 
 The managed instance group will provision two VMs as stated by the size.
 
@@ -163,7 +163,7 @@ To verify the presence of the global static ip run:
 To add our managed instance group to the backend service run:
 ##
     gcloud compute backend-services add-backend nucleus-backend-service \
-    --instance-group=nucleus-backend-group \
+    --instance-group=nucleus-webserver \
     --instance-group-zone=$ZONE \
     --global
 
