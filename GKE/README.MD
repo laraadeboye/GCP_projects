@@ -45,7 +45,7 @@ If it is successfully run, no output will be seen. We will move to the next step
 #
     gcloud config set compute/region $REGION; gcloud config set compute/zone $ZONE
 
-INSERT IMAGE
+![set default region and zone](Screenshot 2024-04-02 150501.png)
 
  &nbsp; 
 
