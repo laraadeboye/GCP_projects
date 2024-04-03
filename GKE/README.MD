@@ -56,9 +56,8 @@ If it is successfully run, no output will be seen. We will move to the next step
     gcloud container clusters create --machine-type=e2-medium --zone=$ZONE lab-cluster
 
 It may take close to 10 minutes for the cluster to be created:
-PICTURE
-
-
+![create GKE cluster in progress](https://github.com/laraadeboye/GCP_projects/blob/main/GKE/deploying-app-images/Screenshot%202024-04-02%20150747.png)
+![create GKE cluster done](https://github.com/laraadeboye/GCP_projects/blob/main/GKE/deploying-app-images/Screenshot%202024-04-02%20151343.png)
 
 &nbsp; 
 ## Step 2: Get auth details for the cluster
@@ -66,7 +65,7 @@ PICTURE
 #
     gcloud container clusters get-credentials lab-cluster
 
-PICTURE
+![Get authentication details](https://github.com/laraadeboye/GCP_projects/blob/main/GKE/deploying-app-images/Screenshot%202024-04-02%20151459.png)
 
 &nbsp; 
 ## Step 3: Deploy an application to the cluster
@@ -75,14 +74,14 @@ We will deploy an application named `hello-app` located in the google container 
 #
     kubectl create deployment hello-server --image=gcr.io/google-samples/hello-app:1.0
 
-PICTURE
+![Deploy hello app on GKE](https://github.com/laraadeboye/GCP_projects/blob/main/GKE/deploying-app-images/Screenshot%202024-04-02%20151659.png)
 
 2. We will also create a service of type `loadbalancer` on port `8080` that will help expose our application to external traffic with the following command:
 
 #
     kubectl expose deployment hello-server --type=LoadBalancer --port 8080
 
-PICTURE
+![Hello app exposed on port 8080](https://github.com/laraadeboye/GCP_projects/blob/main/GKE/deploying-app-images/Screenshot%202024-04-02%20151813.png)
 
 We can confirm that both the deployment and service have been created by running the following commands respectively:
 #
@@ -91,18 +90,22 @@ We can confirm that both the deployment and service have been created by running
 #
     kubectl get service
 
-PICTURE
+![Verify deployment and service created](https://github.com/laraadeboye/GCP_projects/blob/main/GKE/deploying-app-images/Screenshot%202024-04-02%20151911.png)
 
 4. The application can now be viewed from a webserver with the command below (Replace [EXTERNAL-IP]with the external ip for hello-server ):
 #
     http://[EXTERNAL-IP]:8080
-
+![Hello app is accessible on browser](https://github.com/laraadeboye/GCP_projects/blob/main/GKE/deploying-app-images/Screenshot%202024-04-02%20152220.png)
 
 ## Step 4: Delete the cluster
 We can the delete the cluster by running the following command.(If we leave clusters running we will incure costs). 
 It may take several minutes for the cluster to be deleted. Grab a coffee while you wait. :
 #
     gcloud container clusters delete lab-cluster
+![Delete GKE cluster](https://github.com/laraadeboye/GCP_projects/blob/main/GKE/deploying-app-images/Screenshot%202024-04-02%20152334.png)
+
+The cluster was successfully deleted
+![Deleted GKE cluster](https://github.com/laraadeboye/GCP_projects/blob/main/GKE/deploying-app-images/Screenshot%202024-04-02%20152845.png)
 
 ## Conclusion
 
