@@ -34,20 +34,24 @@ Create the instance in the **europe-west4-a**  zone.
 Use an `e2-micro` machine type.
 Use the default image type (Debian Linux).
 
-### My answers
+# My answer
 A jumphost also called a bastion host. It provides an external point of entry into a Virtual Private Cloud (VPC) network that contains VMs that don't have external IP addresses. When using a bastion host, connect to the bastion host first, and then connect to the target VM. From the jumphost, we can SSH into the target machines.
 
 
 
-1. In the Google Cloud console, activate Cloud Shell and set the default region and zone.
+1. In the Google Cloud console, activate Cloud Shell. First,set the environment variables of the region and zone as follows:
 ##
-    gcloud config set compute/region europe-west4;gcloud config set compute/zone europe-west4-a
+    export REGION=europe-west4; export ZONE=europe-west4-a
+
+Then set the default region and zone.
+##
+    gcloud config set compute/region $REGION;gcloud config set compute/zone $ZONE    
 
 2. Create a compute engine VM named `nucleus-jumphost-376`:
 
 ##
     gcloud compute instances create nucleus-jumphost-376 \
-    --zone=europe-west4-a \
+    --zone=$ZONE \
     --machine-type=e2-micro 
        
         
@@ -86,7 +90,7 @@ You need to:
 
 ##
     gcloud compute instance-templates create nucleus-lb-template \
-    --region=europe-west4 \
+    --region=$REGION \
     --network=default \
     --subnet=default \
     --tags=allow-health-check \
@@ -107,15 +111,15 @@ The script will update the vm, install nginx and replace nginx with 'Google Clou
 
 2. We will create a managed-instance group named `nucleus-webserver`:
 ##
-    gcloud compute instance-groups managed create nucleus-webserver --template=nucleus-lb-template --size=2 --zone=europe-west4-a
+    gcloud compute instance-groups managed create nucleus-webserver --template=nucleus-lb-template --size=2 --zone=$ZONE
 
 Set the named-port with this command:
 ##
-    gcloud compute instance-groups managed set-named-ports nucleus webserver --named-ports http:80 --zone=europe-west4-a
+    gcloud compute instance-groups set-named-ports nucleus-webserver --named-ports http:80 --zone=$ZONE
 
 The managed instance group will provision two VMs as stated by the size.
 
-3. We will crerate a firewall rule named `allow-tcp-rule-969`
+3. We will create a firewall rule named `allow-tcp-rule-969`
 ##
     gcloud compute firewall-rules create allow-tcp-rule-969 \
     --network=default \
@@ -159,8 +163,8 @@ To verify the presence of the global static ip run:
 To add our managed instance group to the backend service run:
 ##
     gcloud compute backend-services add-backend nucleus-backend-service \
-    --instance-group=nucleus-backend-group \
-    --instance-group-zone=us-west4-a \
+    --instance-group=nucleus-webserver \
+    --instance-group-zone=$ZONE \
     --global
 
 7. We will create a URL map named `nucleus-map-http`, and target the HTTP proxy named `nucleus-http-lb-proxy` to route the incoming requests to the default backend service.
