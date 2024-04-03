@@ -56,8 +56,10 @@ If it is successfully run, no output will be seen. We will move to the next step
     gcloud container clusters create --machine-type=e2-medium --zone=$ZONE lab-cluster
 
 It may take close to 10 minutes for the cluster to be created:
+
 ![create GKE cluster in progress](https://github.com/laraadeboye/GCP_projects/blob/main/GKE/deploying-app-images/Screenshot%202024-04-02%20150747.png)
 ![create GKE cluster done](https://github.com/laraadeboye/GCP_projects/blob/main/GKE/deploying-app-images/Screenshot%202024-04-02%20151343.png)
+
 
 &nbsp; 
 ## Step 2: Get auth details for the cluster
