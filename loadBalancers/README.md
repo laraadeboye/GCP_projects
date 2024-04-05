@@ -2,14 +2,14 @@
 
 The purpose of this hands-on is to learn how to set up network and http load balancers on google gloud from the google cloudshell using the gcloud CLI. The gcloud CLI is accessed via google cloudshell, a command-line utility with 5GB of persisteent storage and pre-installed cloud SDK. It allows easy access to instances created on google cloud. In addition, Cloud shell provides the following:
 
-Temporary Compute Engine VM
-gcloud: for working with Compute Engine and many Google Cloud services
-gcloud storage: for working with Cloud Storage
-kubectl: for working with Google Kubernetes Engine and Kubernetes
-bq: for working with BigQuery
-Language support for Java, Go, Python, Node.js, PHP, and Ruby
-Web preview functionality
-Built-in authorization for access to resources and instances
+* Temporary Compute Engine VM
+* gcloud: for working with Compute Engine and many Google Cloud services
+* gcloud storage: for working with Cloud Storage
+* kubectl: for working with Google Kubernetes Engine and Kubernetes
+* bq: for working with BigQuery
+* Language support for Java, Go, Python, Node.js, PHP, and Ruby
+* Web preview functionality
+* Built-in authorization for access to resources and instances
 
  &nbsp;
 
