@@ -10,6 +10,7 @@ Google Marketplace offers production-ready stacks , products, datasts and servic
 Jenkins is an open-source continuous integration environment. You can use it to define jobs in Jenkins that can perform tasks such as running a scheduled build of software and backing up data.
 
 &nbsp; 
+
 ## Outline
 
 Step 1: Use Marketplace to build a Jenkins Continuous Integration environment.
@@ -17,15 +18,15 @@ Step 1: Use Marketplace to build a Jenkins Continuous Integration environment.
 Step 2: Verify that you can manage the service from the Jenkins UI.
 
 Step 3: Administer the service from the Virtual Machine host through SSH.
+
 &nbsp; 
 
 ## Prerequisites
 * You need an active google cloud account for this hands-on.
+  
 &nbsp; 
 
 ## Step 1: Use Marketplace to build a Jenkins Continuous Integration environment.
-
-
 
 1. Navigate to Marketplace. 
 * From google cloud console, on the **Navigation menu**, click **Marketplace**
@@ -35,6 +36,7 @@ Step 3: Administer the service from the Virtual Machine host through SSH.
 * Click on the deployment.
 
   ![search for Bitnami package for Jenkins](jenkins-fast-deploy/jenkins-deploy-Images/Screenshot 2024-04-05 101519.png)
+  
 &nbsp; 
 
 2. Launch Jenkins. 
@@ -47,6 +49,8 @@ Deployment Manager, agoogle cloud service uses templates witten in YAML, python 
   ![Jenkins deployment in progress](https://github.com/laraadeboye/GCP_projects/blob/main/jenkins-fast-deploy/jenkins-deploy-Images/Screenshot%202024-04-05%20101909.png)
   &nbsp; 
   ![Click Jenkins-1 VM](https://github.com/laraadeboye/GCP_projects/blob/main/jenkins-fast-deploy/jenkins-deploy-Images/Screenshot%202024-04-05%20102221.png)
+
+  
 &nbsp; 
 
 
@@ -58,7 +62,9 @@ Deployment Manager, agoogle cloud service uses templates witten in YAML, python 
 * If prompted, proceed to install *the suggested plugins* then click *Restart*
 
   ![Jenkins login uI](https://github.com/laraadeboye/GCP_projects/blob/main/jenkins-fast-deploy/jenkins-deploy-Images/Screenshot%202024-04-05%20102452.png)
+  
 &nbsp;
+
   ![Jenkins console](https://github.com/laraadeboye/GCP_projects/blob/main/jenkins-fast-deploy/jenkins-deploy-Images/Screenshot%202024-04-05%20102621.png)
 
 ## Step 3: Step 3: Administer the service from the Virtual Machine host through SSH.
@@ -78,6 +84,7 @@ Deployment Manager, agoogle cloud service uses templates witten in YAML, python 
     sudo /opt/bitnami/ctlscript.sh restart
 
  ![Administer JEnkins from the SSH window](https://github.com/laraadeboye/GCP_projects/blob/main/jenkins-fast-deploy/jenkins-deploy-Images/Screenshot%202024-04-05%20103257.png)
+ 
 &nbsp;
 
 ## Conclusion
