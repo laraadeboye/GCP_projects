@@ -34,7 +34,7 @@ Step 3: Administer the service from the Virtual Machine host through SSH.
 
 * Click on the deployment.
 
-  [search for Bitnami package for Jenkins](jenkins-fast-deploy/jenkins-deploy-Images/Screenshot 2024-04-05 101519.png)
+  ![search for Bitnami package for Jenkins](jenkins-fast-deploy/jenkins-deploy-Images/Screenshot 2024-04-05 101519.png)
 &nbsp; 
 
 2. Launch Jenkins. 
@@ -44,9 +44,9 @@ Deployment Manager, agoogle cloud service uses templates witten in YAML, python 
 
 3. Navigate to the compute engine on the console and click **jenkins-1 VM**, use the public IP to visit the jenkins UI on another tab
 
-  [Jenkins deployment in progress](https://github.com/laraadeboye/GCP_projects/blob/main/jenkins-fast-deploy/jenkins-deploy-Images/Screenshot%202024-04-05%20101909.png)
+  ![Jenkins deployment in progress](https://github.com/laraadeboye/GCP_projects/blob/main/jenkins-fast-deploy/jenkins-deploy-Images/Screenshot%202024-04-05%20101909.png)
   &nbsp; 
-  [Click Jenkins-1 VM](https://github.com/laraadeboye/GCP_projects/blob/main/jenkins-fast-deploy/jenkins-deploy-Images/Screenshot%202024-04-05%20102221.png)
+  ![Click Jenkins-1 VM](https://github.com/laraadeboye/GCP_projects/blob/main/jenkins-fast-deploy/jenkins-deploy-Images/Screenshot%202024-04-05%20102221.png)
 &nbsp; 
 
 
@@ -57,9 +57,9 @@ Deployment Manager, agoogle cloud service uses templates witten in YAML, python 
 * Visit the site on another browser tab. Reload multiple times if you get an error. Proceed to login with the **Admin user** and **Admin password** values.
 * If prompted, proceed to install *the suggested plugins* then click *Restart*
 
-  [Jenkins login uI](https://github.com/laraadeboye/GCP_projects/blob/main/jenkins-fast-deploy/jenkins-deploy-Images/Screenshot%202024-04-05%20102452.png)
+  ![Jenkins login uI](https://github.com/laraadeboye/GCP_projects/blob/main/jenkins-fast-deploy/jenkins-deploy-Images/Screenshot%202024-04-05%20102452.png)
 &nbsp;
-  [Jenkins console](https://github.com/laraadeboye/GCP_projects/blob/main/jenkins-fast-deploy/jenkins-deploy-Images/Screenshot%202024-04-05%20102621.png)
+  ![Jenkins console](https://github.com/laraadeboye/GCP_projects/blob/main/jenkins-fast-deploy/jenkins-deploy-Images/Screenshot%202024-04-05%20102621.png)
 
 ## Step 3: Step 3: Administer the service from the Virtual Machine host through SSH.
 
@@ -77,7 +77,7 @@ Deployment Manager, agoogle cloud service uses templates witten in YAML, python 
 #
     sudo /opt/bitnami/ctlscript.sh restart
 
- [Administer JEnkins from the SSH window](https://github.com/laraadeboye/GCP_projects/blob/main/jenkins-fast-deploy/jenkins-deploy-Images/Screenshot%202024-04-05%20103257.png)
+ ![Administer JEnkins from the SSH window](https://github.com/laraadeboye/GCP_projects/blob/main/jenkins-fast-deploy/jenkins-deploy-Images/Screenshot%202024-04-05%20103257.png)
 &nbsp;
 
 ## Conclusion
