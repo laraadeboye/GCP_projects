@@ -30,6 +30,7 @@ Imagine you have secure, private networks (VPCs) in Google Cloud. VPC Network Pe
 - Prerequisites
 - Create a custom network in two projects
 - Set up a VPC Network peering session
+  
 ## Step 0. Prerequisites 
 1. Within this account, two projects had been created each with project id
 - qwiklabs-gcp-01-ad8775fbae89 (PROJECT-A)
@@ -38,7 +39,7 @@ Imagine you have secure, private networks (VPCs) in Google Cloud. VPC Network Pe
 
 From the console we can view the projects by clicking on the project drop-down, then select **ALL**
 
-IMAGE
+![Project drop-down](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20180242.png)
 
 2. We will configure cloudshell to set the individual project IDs. Open cloudshell from the console then click on the + sign on cloudshell tab to open two tabs within the cloudshell console. In the first tab, run the following command:
 
@@ -46,15 +47,18 @@ IMAGE
 #
     gcloud config set project qwiklabs-gcp-01-ad8775fbae89
 
+![Project A tab](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20181001.png)
+Notice that project A tab with project ID `qwiklabs-gcp-01-ad8775fbae89` is selected in the cloudshell console
+
 In the second tab run the following command:
 
 *PROJECT-B*
 #
     gcloud config set project qwiklabs-gcp-01-97d557cfb486
+![Project B tab](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20180929.png)
 
 
-
-## Step 1. Create a custom network in two projects
+## Step 1. Create a custom network in the two projects
 
 #### **FOR PROJECT A**
 We will navigate to the first cloudshell tab that we configured for PROJECT A and create a custom network having a subnet and a VM instance.
@@ -63,18 +67,25 @@ We will navigate to the first cloudshell tab that we configured for PROJECT A an
 #
     gcloud compute networks create network-a --subnet-mode custom
 
+![custom network a](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20181113.png)
+
 2.  We create a subnet within the `us-central1` region with a network range of `10.0.0.0/16`:
 #
     gcloud compute networks subnets create network-a-subnet --network network-a \
     --range 10.0.0.0/16 --region us-central1
+![custom network b](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20181215.png)
 
 3. Then, we create a VM instance named `vm-a` within the subnet we created:
 #
     gcloud compute instances create vm-a --zone us-central1-a --network network-a --subnet network-a-subnet --machine-type e2-small
 
+![vm-a](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20181315.png)
+
 4. We will enable firewall rules for the custom network `network-a`  to allow SSH on port 22 and icmp. ICMP is a network layer protocol mainly used to determine whether or not data is reaching its intended destination in a timely manner.
 #
     gcloud compute firewall-rules create network-a-fw --network network-a --allow tcp:22,icmp
+
+![network firewall a](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20181405.png)
 
 #### **FOR PROJECT B**
 We will switch to the second cloudshell tab that we configured for project B and also create a custom network having one subnet and a VM instance created within the subnet.
@@ -83,18 +94,24 @@ We will switch to the second cloudshell tab that we configured for project B and
 #
     gcloud compute networks create network-b --subnet-mode custom
 
-2. The subnet will also be craeted in the `us-central1` region with the network range of `10.8.0.0/16`:
+![network-b](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20181516.png)
+
+2. The subnet will also be created in the `us-central1` region with the network range of `10.8.0.0/16`:
 #
     gcloud compute networks subnets create network-b-subnet --network network-b \
     --range 10.8.0.0/16 --region us-central1
+![network-b-subnet](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20181614.png)
 
 3. We will create the VM instance by running the following command:
 #
     gcloud compute instances create vm-b --zone us-central1-a --network network-b --subnet network-b-subnet --machine-type e2-small
 
+![vm-b](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20181658.png)
+
 4. To enable SSH on port 22 and icmp:
 #
     gcloud compute firewall-rules create network-b-fw --network network-b --allow tcp:22,icmp
+![firewallrules network-b](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20181745.png)
 
 ## Step 2. Set up a VPC Network peering session
 
@@ -104,16 +121,20 @@ IMAGE
 
 Let's start with **PROJECT A**
 
+![peer a-b](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20191202.png)
+
 From the console, go to VPC Network Peering and create a connection with network b. We will name this connection `peer-ab`. Also set the **Your VPC network** (which is the network you want to peer) as `network-a`. the **Peered VPC network** is `In another project`. We will also paste the project ID of the second project as shown (in the image below). Remember that our project ID for the second project is `qwiklabs-gcp-01-97d557cfb486`. You will need to type in the **VPC network name** of the second network (network-b)
 Finally, Click **Create**.
+
+![VPC peering configuration a](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20182159.png)
 
 *Your project ID will likely be different if you are using this project as a guide.*
 
 For now, peering state remains INACTIVE because there is no matching configuration in network-b in project-B. You should observe the Status message, *Waiting for peer network to connect*.
 
-IMAGE
 
 **PROJECT B**
+![peer b-a](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20193016.png)
 From the console, go to VPC Network Peering and create a connection with network a. 
 - **Name**:`peer-ab`
 - **Your VPC network** ( the network you want to peer): `network-b`. t - **Peered VPC network**: `In another project`.  
@@ -121,9 +142,12 @@ From the console, go to VPC Network Peering and create a connection with network
 - **VPC network name** (Type the name of the second network): network-a
 Click **Create**.
 
-IMAGE
+![VPC peering B config](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20182321.png)
+![VPC peering b config](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20182514.png)
 
 You will observe that the VPC Network Peering becomes active because traffic is now flowing between the two VPCs.
+
+![Active traffic flow](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20193253.png)
 
 In the individual cloudshell consoles, if you run the following command, replacing [PROJECT ID] with the respective project ids, you will see the lists of routes.
 
@@ -132,12 +156,12 @@ In the individual cloudshell consoles, if you run the following command, replaci
 
 PROJECT A: qwiklabs-gcp-01-ad8775fbae89
 
-
-IMAGE
+![routes](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20182858.png)
 
 PROJECT B: qwiklabs-gcp-01-97d557cfb486
 
-IMAGE
+![routes](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20182743.png)
+
 ## Step 3. Test the connectivity
 In this step, we will tet the network connectivity by copying the internal IP addresses for voth vm-a and vm-by
 
@@ -146,6 +170,9 @@ Mine are as follows:
 - vm -b 10.8.0.2
 
 You can SSH into the two VMs from their individual consoles or from there cloudshell tabs
+![console vm-a](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20183054.png)
+&bbsp;
+![console vm-b](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20183145.png)
 
 In PROJECT A run the following command:
 #
@@ -153,7 +180,7 @@ In PROJECT A run the following command:
 
 See the output below:
 
-IMAGE
+![ping vm-a](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20183550.png)
 
 In PROJECT B run the following command:
 #
@@ -161,7 +188,7 @@ In PROJECT B run the following command:
 
 See the output below:
 
-IMAGE
+![ping vm-a](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20183348.png)
 
 ## Conclusion
 We have been able to set up a VPC Network Peering connection between two different VPCs in different projects. 
