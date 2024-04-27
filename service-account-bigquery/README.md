@@ -80,7 +80,7 @@ Create the VM with the following command:
 #
     gcloud compute instances describe bigquery-instance
 
-7. SSH into the VM by clicking on the SSH tab beside the VM on the console. ore run the following command:
+7. SSH into the VM by clicking on the SSH tab beside the VM on the console or run the following command:
 #
     gcloud compute ssh bigquery-instance   
 Approve the connection and continue without a passphrase
