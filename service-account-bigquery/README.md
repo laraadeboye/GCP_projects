@@ -20,7 +20,8 @@ Set region and zone for your project:
     gcloud config set compute/region us-east4; gcloud config set compute/zone us-east4-c
 Click **Authorize** (if prompted)
 
-IMAGE
+![set region and zone](https://github.com/laraadeboye/GCP_projects/blob/main/service-account-bigquery/images/Screenshot%202024-04-27%20155402.png)
+
 (Ignore the property validation error)
 
 1. Create sample service account named `my-sa-123`:
@@ -28,7 +29,7 @@ IMAGE
 #
     gcloud iam service-accounts create my-sa-123 --display-name "my service account"
 
-IMAGE
+![my-sa-123](https://github.com/laraadeboye/GCP_projects/blob/main/service-account-bigquery/images/Screenshot%202024-04-27%20160048.png)
 
 2. Grant `editor` role to the `my-sa-123` service account :
 
@@ -36,11 +37,14 @@ IMAGE
     gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
     --member serviceAccount:my-sa-123@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com --role roles/editor
 
-IMAGE
+You will see an output similar to the image below:
+![my-sa-123-editor role](https://github.com/laraadeboye/GCP_projects/blob/main/service-account-bigquery/images/Screenshot%202024-04-27%20160340.png)
 
 3. We have created a sample service role. Now create a service account named **bigquery-qwiklab** (you can name your service account whatever is appropriate)
 #
     gcloud iam service-accounts create bigquery-qwiklab --display-name "bigquery-qwiklab"
+
+![bigquery-service-role](https://github.com/laraadeboye/GCP_projects/blob/main/service-account-bigquery/images/Screenshot%202024-04-27%20160511.png)
 
 4. Create roles `bigquery data viewer` and `bigquery user` for the service account. View the [documentation](https://cloud.google.com/bigquery/docs/access-control)
 
@@ -70,6 +74,7 @@ Create the VM with the following command:
     --scopes=https://www.googleapis.com/auth/cloud-platform \
     --image=projects/debian-cloud/global/images/family/debian-11
    
+![bigquery-instance](https://github.com/laraadeboye/GCP_projects/blob/main/service-account-bigquery/images/Screenshot%202024-04-27%20162925.png)
 
 6. Verify that the VM was created
 #
@@ -92,7 +97,7 @@ Approve the connection and continue without a passphrase
 
 Ignore all errors.
 You will see an output similar to the image below:
-IMAGE
+![libraries-installation](https://github.com/laraadeboye/GCP_projects/blob/main/service-account-bigquery/images/Screenshot%202024-04-27%20163629.png)
 
 9. Create a python file named `query.py` 
 
@@ -123,7 +128,7 @@ print(client.query(query).to_dataframe())
 " > query.py
 ```
     
-IMAGE
+![query.py](https://github.com/laraadeboye/GCP_projects/blob/main/service-account-bigquery/images/Screenshot%202024-04-27%20163744.png)
 
 Add the Project ID to `query.py` with the following command:
 #
@@ -141,13 +146,16 @@ Add the service account email to query.py with:
 10. Run the query with the following command:
 #
     python3 query.py
+    
+![query with python](https://github.com/laraadeboye/GCP_projects/blob/main/service-account-bigquery/images/Screenshot%202024-04-27%20165020.png)
 
-
-IMAGE
 
 *Troubleshooting*
 
 *Ensure there is proper indentation. Python scripts are strict with indentations. Otherwise, it will throw an error. If there is no error, proceed.*
+
+Error:
+![Error](https://github.com/laraadeboye/GCP_projects/blob/main/service-account-bigquery/images/Screenshot%202024-04-27%20164246.png)
 
 *To solve the error use an editor to open the query.py text file and correct the indentation*
 
