@@ -1,7 +1,8 @@
 
 # HOW TO CREATE VPC NETWORK PEERING ACROSS TWO PROJECTS IN GOOGLE CLOUD
 
-IMAGE
+![VPC network peering](https://github.com/laraadeboye/GCP_projects/blob/main/VPC-network-peering/images/Screenshot%202024-04-27%20173123.png)
+<figcaption>VPC network peering image from google </figcaption>
 
 
 ## OVERVIEW
